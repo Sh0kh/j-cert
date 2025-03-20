@@ -8,13 +8,18 @@ import AdminLayout from "./layouts/AdminLayout";
 import ProtectedRoute from "./Components/ProtectedRoute"; // Импорт компонента защиты маршрутов
 import UI from "./Pages/UI";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Portfolio from "./Pages/Portfolio";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 
 
 function App() {
+  
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/portfolio" element={<Portfolio/>} />
         <Route path="/example/UI" element={<UI />} />
         <Route path="/" element={<AppLayout />}>
           <Route
@@ -27,6 +32,8 @@ function App() {
           </Route>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
+
+
           </Route>
         </Route>
       </Routes>
