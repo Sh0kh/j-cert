@@ -1,5 +1,5 @@
 const CONFIG = {
-    API_URL: 'https://api.darxon-res.uz/',
+    API_URL: 'http://j-sert.uz',
   };
   
   export default CONFIG;

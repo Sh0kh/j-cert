@@ -1,4 +1,4 @@
 import axios from 'axios' 
-axios.defaults.baseURL = 'https://api.darxon-res.uz/api'
+axios.defaults.baseURL = 'http://j-sert.uz'
 
 export default axios

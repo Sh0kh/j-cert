@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 * {
-  font-family: "Philosopher", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .Container {
@@ -22,10 +22,6 @@
   transition: right 0.3s ease-in-out;
   border-radius: 5px;
 }
-
-
-
-
 
 ::-webkit-scrollbar {
   width: 8px;

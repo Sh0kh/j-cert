@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { Button, Input } from '@material-tailwind/react';
-import { useNavigate } from 'react-router-dom';
-import axios from '../utils/axios';
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import { Button, Input } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import axios from "../utils/axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate()
+  const [phone, setPhone] = useState(""); // Только цифры
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const Login = async () => {
+  const handleLogin = async () => {
     try {
-      const loginData = {
-        phone: login,
-        password: password
-      }
-      const response = await axios.post(`/admin/login`, loginData)
-      localStorage.setItem('token', response.data.tokens.refresh_token);
-      navigate('/admin/category')
+      const response = await axios.get(`login?login=+998${phone}&password=${password}`, {
+      });
+
+      localStorage.setItem("token", response.data.tokens.refresh_token);
+      navigate("/admin/category");
+
       Swal.fire({
-        title: 'Muvaffaqiyatli!',
-        icon: 'success',
-        position: 'top-end',
+        title: "Success!",
+        text: "You have successfully logged in.",
+        icon: "success",
+        position: "top-end",
         timer: 3000,
         timerProgressBar: true,
         showCloseButton: true,
@@ -30,10 +30,10 @@ const Login = () => {
       });
     } catch (error) {
       Swal.fire({
-        title: 'Error!',
-        text: error.response?.data?.message || 'Error.',
-        icon: 'error',
-        position: 'top-end',
+        title: "Error!",
+        text: error.response?.data?.message || "An error occurred.",
+        icon: "error",
+        position: "top-end",
         timer: 3000,
         timerProgressBar: true,
         showCloseButton: true,
@@ -41,42 +41,41 @@ const Login = () => {
         showConfirmButton: false,
       });
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#A79684]">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg text-center">
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5]">
+      <div className="w-full max-w-md p-8 bg-gray-50 rounded-lg shadow-lg space-y-6">
+        <h1 className="text-3xl font-bold text-center text-gray-800">Welcome Back!</h1>
 
-        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+        <Input
+          label="Phone Number"
+          value={phone}
+          onChange={(e) => {
+            const value = e.target.value.replace(/\D/g, ""); // Оставляем только цифры
+            setPhone(value.slice(0, 9)); // Ограничиваем 
+          }}
+          type="text"
+          required
+          className="border-gray-300 focus:border-indigo-500"
+        />
 
-        <div className="space-y-4">
-          <Input
-            label="Email"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
-            color="gray"  // Changed to gray for a neutral look
-            type="text"
-            required
-            className="border-black"  // Black border color
-          />
-          <Input
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            color="gray"  // Changed to gray for a neutral look
-            type="password"
-            required
-            className="border-black"  // Black border color
-          />
-          <Button
-            fullWidth
-            color="gray"  // Changed to gray for a neutral button
-            onClick={Login}
-            className="bg-black text-white hover:bg-gray-800"
-          >
-            Login
-          </Button>
-        </div>
+        <Input
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          required
+        />
+
+        <Button
+          fullWidth
+          color="indigo"
+          onClick={handleLogin}
+          className="bg-[#009970] text-white hover:bg-[#009970cd] transition duration-300"
+        >
+          Login
+        </Button>
       </div>
     </div>
   );
