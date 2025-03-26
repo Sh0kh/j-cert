@@ -16,6 +16,7 @@ import Portfolio from "./Pages/Portfolio";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Register from "./Pages/Register";
 import CheckPage from "./Pages/CheckPage";
+import AdminTime from "./Pages/AdminPages/AdminTime";
 
 
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/admin/home" element={<AdminHome />} />
             <Route path="/admin/user" element={<AdminUser />} />
             <Route path="/admin/file" element={<AdminFile />} />
+            <Route path='/admin/time' element={<AdminTime />} />
           </Route>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />

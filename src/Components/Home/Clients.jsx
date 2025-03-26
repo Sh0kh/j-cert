@@ -2,8 +2,13 @@ import { useState, useEffect } from "react";
 import img1 from "../../img/photo (4).jpg";
 import img2 from "../../img/photo (6).jpg";
 import img3 from "../../img/photo (8).jpg";
+import axios from "axios";
 
 export default function Clients() {
+
+
+
+  const [data, setData] = useState('')
   const [time, setTime] = useState({
     days: 0,
     hours: 0,
@@ -14,8 +19,23 @@ export default function Clients() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [img1, img2, img3];
 
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/sdg/uz/test/date/get`)
+      setData(response?.data?.object)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   useEffect(() => {
-    const countdownDate = new Date("2025-06-01T00:00:00").getTime();
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    const countdownDate = new Date(data || '2025-05-10T18:52:00').getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
