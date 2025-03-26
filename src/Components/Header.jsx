@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import logo from "../img/big-logo.jpg";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,24 +23,38 @@ export default function Header() {
   return (
     <header id="header" className={`header fixed-top ${scrolled ? "scrolled" : ""}`}>
       <div className="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-end">
-        <a style={{ backgroundColor: "#fff" }} href="index.html" className="logo d-flex align-items-center me-auto">
+        <NavLink style={{ backgroundColor: "#fff" }} to={'/'} className="logo d-flex align-items-center me-auto">
           <img src={logo} alt="Logo" />
-        </a>
+        </NavLink>
 
         <nav id="navmenu" className="navmenu">
           <ul>
-            <li><a href="https://secure.j-cert.org/score/" className="active">Natijani ko'rish</a></li>
-            <li><a href="#about">Biz haqimizda</a></li>
-            <li><a href="/portfolio">Postlar</a></li>
-            <li><a href="#clients">Vaqt qoldi</a></li>
-            <li><a href="#locations">Manzillar</a></li>
-            <li><a href="#contact">Bog'lanish</a></li>
-            <li><a href="/login">Login</a></li>
+            <li>
+              <a href="https://secure.j-cert.org/score/" target="_blank" rel="noopener noreferrer">
+                Natijani ko'rish
+              </a>
+            </li>
+            <li>
+              <NavLink to={'/#about'}>Biz haqimizda</NavLink>
+            </li>
+            <li>
+              <NavLink to={'/portfolio'}>Postlar</NavLink>
+            </li>
+            <li>
+              <NavLink to={'/#clients'}>Vaqt qoldi</NavLink>
+            </li>
+            <li>
+              <NavLink to={'/#contact'}>Manzillar</NavLink>
+            </li>
+            <li>
+              <NavLink to={'/#contact'}>Bog'lanish</NavLink>
+            </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-
-        <a className="btn-getstarted" href="form.html">Ro'yxatdan o'tish</a>
+        <NavLink className={'btn-getstarted'} to={'/register'}>
+          Ro'yxatdan o'tish
+        </NavLink>
       </div>
     </header>
   );

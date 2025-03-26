@@ -11,11 +11,15 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.get(`login?login=+998${phone}&password=${password}`, {
+      const response = await axios.post(`/sdg/uz/login`, {}, {
+        params: {
+          login: `+998${phone}`,
+          password: password
+        }
       });
 
-      localStorage.setItem("token", response.data.tokens.refresh_token);
-      navigate("/admin/category");
+      localStorage.setItem("token", response.data.token);
+      navigate("/admin/home");
 
       Swal.fire({
         title: "Success!",
@@ -42,6 +46,8 @@ const Login = () => {
       });
     }
   };
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5]">

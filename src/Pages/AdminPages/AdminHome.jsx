@@ -1,11 +1,41 @@
 // AdminHome.jsx
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FaFileAlt, FaUsers } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function AdminHome() {
     // Пример данных (можно заменить на реальные данные из API)
     const fileCount = 120; // Количество файлов
     const userCount = 45; // Количество пользователей
+    // const navigate = useNavigate()
+
+    // const [userData, setUserData] = useState('')
+
+    // const getUser = async () => {
+    //     try {
+    //         const response = await axios.get('/sdg/uz', {
+    //             headers: {
+    //                 Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //             },
+    //             params: {
+    //                 page: 0,
+    //                 accountType: "STUDENT",
+    //                 size: 5,
+    //             },
+    //         })
+    //         setUserData(response)
+    //     } catch (error) {
+    //         if (error?.status === 401) {
+    //             localStorage.clear();
+    //             navigate('/login')
+    //         }
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     getUser()
+    // }, [])
 
     return (
         <div className="p-[20px]">

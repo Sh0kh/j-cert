@@ -14,18 +14,19 @@ import AdminFile from "./Pages/AdminPages/AdminFile";
 import ErrorPage from "./Pages/ErrorPage";
 import Portfolio from "./Pages/Portfolio";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import Register from "./Pages/Register";
+import CheckPage from "./Pages/CheckPage";
 
 
 
 
 function App() {
-  
+
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />
-        <Route path="/portfolio" element={<Portfolio/>} />
         <Route path="/example/UI" element={<UI />} />
         <Route path="/" element={<AppLayout />}>
           <Route
@@ -35,12 +36,15 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="/admin" element={<AdminHome />} />
+            <Route path="/admin/home" element={<AdminHome />} />
             <Route path="/admin/user" element={<AdminUser />} />
             <Route path="/admin/file" element={<AdminFile />} />
           </Route>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/register" element={<Register />} />
+            <Route path='/check' element={<CheckPage />} />
           </Route>
         </Route>
       </Routes>

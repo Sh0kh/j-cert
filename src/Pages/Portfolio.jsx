@@ -1,30 +1,25 @@
 import { useEffect, useRef } from "react";
-import Footer from "../Components/Footer";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import photo from "../img/photo (10).jpg";
 import logo from "../img/big-logo.jpg";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function Portfolio() {
+
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animatsiya davomiyligi
+      once: true,
+    });
+  }, []);
+
   return (
     <div>
-      <header id="header" className="header d-flex align-items-center fixed-top">
-        <div className="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-end">
-          <a style={{ backgroundColor: "#fff" }} href="/" className="logo d-flex align-items-center me-auto">
-            <img src={logo} alt="Logo" />
-          </a>
-          <nav id="navmenu" className="navmenu">
-            <ul>
-              <li><a href="https://secure.j-cert.org/score/">Natijani ko'rish</a></li>
-              <li><a href="#services">Postlar</a></li>
-            </ul>
-            <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
-          </nav>
-          <a className="btn-getstarted" href="/register">Ro'yxatdan o'tish</a>
-        </div>
-      </header>
 
       <main className="main">
         <div className="page-title light-background">
@@ -39,6 +34,7 @@ export default function Portfolio() {
             </nav>
           </div>
         </div>
+
 
         <section id="portfolio-details" className="portfolio-details section">
           <div className="container" data-aos="fade-up" data-aos-delay="100">
@@ -70,16 +66,17 @@ export default function Portfolio() {
                 <div className="portfolio-description" data-aos="fade-up" data-aos-delay="300">
                   <h2>Bu safar faqatgina "Basic" ni baholash ko’rsatkichlarini tanishtirmoqdamiz.</h2>
                   <p>Umumiy 200 ballning:</p>
-                  <p>50% = 入門 (Boshlang’ich), 60% = JLPT N5, 70% = JLPT N4</p>
-                  <p>Test natijalari yozilgan sertifikat taqdim etiladi va 10 kundan keyin pdf shaklini olish mumkin.</p>
+                  <p>50% = 入門 (Boshlang’ich) <br /> 60% = JLPT N5 <br /> 70% = JLPT N4</p>
+                  <p>Tesdan o’tish yoki o’tolmasligidan qat’iy nazar barcha ishtirokchilarga test natijalari yozilgan sertifikat taqdim etiladi.
+                    Ular ham 10 kundan keyin hujjatning pdf shaklini olishlari mumkin.
+                    *Bilish darajangizni qayd etib borish (自己記録）maqsadida foydalansangiz bo’ladi.
+                    Shuningdek, ayni paytdagi yapon tili bilimingiz ko’rsatib beruvchi hujjat sifatida ham taqdim eta olasiz.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

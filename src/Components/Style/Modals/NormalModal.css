@@ -19,6 +19,8 @@
     background-color: #fff;
     transition: right 0.3s ease-in-out;
     border-radius: 5px;
+    max-height: 700px;
+    overflow-y: auto;
 }
 @media(max-width:850px){
     .NormalModalContent{
