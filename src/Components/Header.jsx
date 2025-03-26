@@ -30,24 +30,19 @@ export default function Header() {
         <nav id="navmenu" className="navmenu">
           <ul>
             <li>
-              <a href="https://secure.j-cert.org/score/" target="_blank" rel="noopener noreferrer">
-                Natijani ko'rish
-              </a>
+              <NavLink to={'/check'}>Natijani korish</NavLink>
             </li>
             <li>
-              <NavLink to={'/#about'}>Biz haqimizda</NavLink>
+              <a href="#about">Biz haqimizda</a>
             </li>
             <li>
               <NavLink to={'/portfolio'}>Postlar</NavLink>
             </li>
             <li>
-              <NavLink to={'/#clients'}>Vaqt qoldi</NavLink>
+              <a href="#clients">Vaqt qoldi</a>
             </li>
             <li>
-              <NavLink to={'/#contact'}>Manzillar</NavLink>
-            </li>
-            <li>
-              <NavLink to={'/#contact'}>Bog'lanish</NavLink>
+              <a href="#contact">Manzillar</a>
             </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>

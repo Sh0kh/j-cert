@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../utils/axios";
 import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
+import logo from "../img/big-logo.jpg";
 
 const CheckPage = () => {
+    const [scrolled, setScrolled] = useState(false);
+
     const [formData, setFormData] = useState({
         registrationNumber: "", // Для первого поля (число)
         dateBirth: "", // Для второго поля (дата рождения)
@@ -27,6 +31,21 @@ const CheckPage = () => {
             }));
         }
     };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -60,6 +79,32 @@ const CheckPage = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5]">
+            <header id="header" className={`header fixed-top ${scrolled ? "scrolled" : ""}`}>
+                <div className="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-end">
+                    <NavLink style={{ backgroundColor: "#fff" }} to={'/'} className="logo d-flex align-items-center me-auto">
+                        <img src={logo} alt="Logo" />
+                    </NavLink>
+                    <nav id="navmenu" className="navmenu">
+                        <ul>
+                            <li>
+                                <NavLink to={'/'}>Bo'sh sahifa</NavLink>
+                            </li>
+                            <li>
+                                <a href="https://secure.j-cert.org/score/" target="_blank" rel="noopener noreferrer">
+                                    Natijani ko'rish
+                                </a>
+                            </li>
+                            <li>
+                                <NavLink to={'/portfolio'}>Postlar</NavLink>
+                            </li>
+                        </ul>
+                        <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                    </nav>
+                    <NavLink className={'btn-getstarted'} to={'/register'}>
+                        Ro'yxatdan o'tish
+                    </NavLink>
+                </div>
+            </header>
             <div className="w-full max-w-md p-8 bg-gray-50 rounded-lg shadow-lg space-y-6">
                 {/* Заголовок */}
                 <h1 className="text-3xl font-bold text-center text-gray-800">

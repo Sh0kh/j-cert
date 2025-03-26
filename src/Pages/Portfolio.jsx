@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,8 +7,25 @@ import photo from "../img/photo (10).jpg";
 import logo from "../img/big-logo.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { NavLink } from "react-router-dom";
 
 export default function Portfolio() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 
   useEffect(() => {
@@ -20,7 +37,30 @@ export default function Portfolio() {
 
   return (
     <div>
-
+      <header id="header" className={`header fixed-top ${scrolled ? "scrolled" : ""}`}>
+        <div className="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-end">
+          <NavLink style={{ backgroundColor: "#fff" }} to={'/'} className="logo d-flex align-items-center me-auto">
+            <img src={logo} alt="Logo" />
+          </NavLink>
+          <nav id="navmenu" className="navmenu">
+            <ul>
+              <li>
+                <NavLink to={'/'}>Bo'sh sahifa</NavLink>
+              </li>
+              <li>
+                <NavLink to={'/check'}>Natijani korish</NavLink>
+              </li>
+              <li>
+                <NavLink to={'/portfolio'}>Postlar</NavLink>
+              </li>
+            </ul>
+            <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          </nav>
+          <NavLink className={'btn-getstarted'} to={'/register'}>
+            Ro'yxatdan o'tish
+          </NavLink>
+        </div>
+      </header>
       <main className="main">
         <div className="page-title light-background">
           <div className="container">

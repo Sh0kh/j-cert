@@ -1,7 +1,10 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RegisterInfoModal from "../Components/Register/RegisterInfoModal";
+import { NavLink } from "react-router-dom";
+import logo from "../img/big-logo.jpg";
+
 
 export default function Register() {
     const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
@@ -34,6 +37,24 @@ export default function Register() {
     )
 
     const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
+
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
 
 
     const handleChange = async (e) => {
@@ -202,6 +223,32 @@ export default function Register() {
 
     return (
         <div className="flex items-center justify-center bg-gray-100 pt-[200px] pb-[100px]">
+            <header id="header" className={`header fixed-top ${scrolled ? "scrolled" : ""}`}>
+                <div className="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-end">
+                    <NavLink style={{ backgroundColor: "#fff" }} to={'/'} className="logo d-flex align-items-center me-auto">
+                        <img src={logo} alt="Logo" />
+                    </NavLink>
+                    <nav id="navmenu" className="navmenu">
+                        <ul>
+                            <li>
+                                <NavLink to={'/'}>Bo'sh sahifa</NavLink>
+                            </li>
+                            <li>
+                                <NavLink to={'/check'}>Natijani korish</NavLink>
+
+                            </li>
+                            <li>
+                                <NavLink to={'/portfolio'}>Postlar</NavLink>
+                            </li>
+                        </ul>
+                        <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                    </nav>
+                    <NavLink className={'btn-getstarted'} to={'/register'}>
+                        Ro'yxatdan o'tish
+                    </NavLink>
+                </div>
+            </header>
+
             <form
                 onSubmit={register}
                 className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"
