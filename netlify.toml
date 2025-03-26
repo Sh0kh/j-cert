@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "build"  # Укажи свою папку, например, "dist" для Vite
+  publish = "dist"  # Укажи свою папку, например, "dist" для Vite
 
 [[headers]]
   for = "/*.js"
