@@ -1,4 +1,8 @@
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+[build]
+  command = "npm run build"
+  publish = "build"  # Укажи свою папку, например, "dist" для Vite
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
