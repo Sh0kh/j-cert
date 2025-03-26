@@ -1,8 +1,13 @@
 [build]
   command = "npm run build"
-  publish = "dist"  # Укажи свою папку, например, "dist" для Vite
+  publish = "dist" 
 
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Content-Type = "application/javascript"
+    Content-Type = "application/javascript" 
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
