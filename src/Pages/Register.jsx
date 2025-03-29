@@ -4,12 +4,15 @@ import React, { useState, useEffect } from "react";
 import RegisterInfoModal from "../Components/Register/RegisterInfoModal";
 import { NavLink } from "react-router-dom";
 import logo from "../img/big-logo.jpg";
+import FileUploadInfoModal from "../Components/Register/FileUploadInfoModal";
 
 
 export default function Register() {
     const [isLoading, setIsLoading] = useState(false); // Состояние загрузки
     const [infoModal, setInfoModal] = useState(false)
     const [infoData, setInfoData] = useState([])
+    const [fileUploadInfoModal, setFileUploadInfoModal] = useState(false)
+
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -319,6 +322,7 @@ export default function Register() {
                     >
                         <option value="">Tanlang</option>
                         <option value="Toshkent">Toshkent</option>
+                        <option value="Sirdaryo">Sirdaryo</option>
                         <option value="Samarqand">Samarqand</option>
                         <option value="Buxoro">Buxoro</option>
                         <option value="Namangan">Namangan</option>
@@ -368,10 +372,11 @@ export default function Register() {
                 {/* Passport Series */}
                 <div className="mb-4 relative">
                     <label className="block text-sm font-medium mb-2">
-                        Passport seriyasi
+                        Passport seriya raqami
                     </label>
                     <div className="flex items-center">
                         <input
+                            placeholder="AD1234567"
                             type="text"
                             name="passportSeries"
                             value={formData.passportSeries}
@@ -414,31 +419,71 @@ export default function Register() {
 
                 {/* Photo */}
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">
+                    <label
+                        htmlFor="user_avatar"
+                        className="block text-sm font-medium mb-2"
+                    >
                         Foto (3x4)
                     </label>
                     <input
                         type="file"
+                        id="user_avatar"
                         name="user_avatar"
                         accept="image/*"
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                        className="hidden" // Скрываем стандартный input
                         required
                     />
+                    <label
+                        htmlFor="user_avatar"
+                        className="w-full px-4 py-2 bg-[#009970] text-white text-center rounded cursor-pointer hover:bg-[#32c29c] transition duration-300"
+                    >
+                        {formData?.user_avatar ? 'Fayl yuklandi' : 'Yuklash'}
+                    </label>
                 </div>
                 {/* Payment Check File */}
-                <div className="mb-6">
-                    <label className="block text-sm font-medium mb-2">
+
+                <div className="mb-4">
+                    <label
+                        htmlFor="user_document"
+                        className="block text-sm font-medium mb-2"
+                    >
                         To'lov cheki (fayl yuklash)
                     </label>
                     <input
                         type="file"
+                        id="user_document"
                         name="user_document"
-                        accept=".pdf,.jpg,.jpeg,.png" // Разрешенные форматы файлов
+                        accept="image/*"
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                        className="hidden" // Скрываем стандартный input
                         required
                     />
+                    <div className="flex items-center gap-[5px]">
+                        <label
+                            htmlFor="user_document"
+                            className="w-full px-4 py-2 bg-[#009970] text-white text-center rounded cursor-pointer hover:bg-[#32c29c] transition duration-300"
+                        >
+                            {formData?.user_document ? 'Fayl yuklandi' : 'Yuklash'}
+                        </label>
+                        <span onClick={() => setFileUploadInfoModal(true)} className="text-gray-500 hover:bg-[#009970] hover:text-[white] p-[7px] duration-300 rounded-[50%]">
+                            <svg
+
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 "
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
 
                 {/* Submit Button */}
@@ -452,6 +497,7 @@ export default function Register() {
                 </button>
             </form>
             <RegisterInfoModal data={infoData} isOpen={infoModal} onClose={() => setInfoModal(false)} />
+            <FileUploadInfoModal isOpen={fileUploadInfoModal} onClose={() => setFileUploadInfoModal(false)} />
         </div>
     );
 }

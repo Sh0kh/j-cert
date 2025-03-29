@@ -1,4 +1,4 @@
 import axios from 'axios' 
-axios.defaults.baseURL = 'http://j-sert.uz'
+axios.defaults.baseURL = 'https://j-sert.uz'
 
 export default axios

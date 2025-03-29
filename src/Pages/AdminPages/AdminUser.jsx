@@ -33,8 +33,18 @@ export default function AdminUser() {
         accountType: "STUDENT",
         genderType: '',
         passport: '',
-        registrationNumber: ''
+        registrationNumber: '',
+        status: ''
     });
+    const statusTranslations = {
+        DONE: "Yakunlangan",
+        PAYMENT_COMPLETED: "To'lov yakunlandi",
+        PAYMENT_FAILED: "To'lov muvaffaqiyatsiz",
+        REGISTERED: "Ro'yxatdan o'tgan",
+        RESULT_UPLOADED: "Natija yuklandi",
+        TEST_COMPLETED: "Test yakunlandi",
+        TEST_FAILED: "Test muvaffaqiyatsiz",
+    };
 
     // Загрузка данных с учетом фильтров
     const fetchData = async (page = 0) => {
@@ -89,6 +99,8 @@ export default function AdminUser() {
             fetchData(newPage); // Загрузка данных для новой страницы
         }
     };
+
+
 
     if (loading) {
         return (
@@ -165,6 +177,25 @@ export default function AdminUser() {
                         </select>
                     </div>
                     <div>
+                        <label className="block text-sm font-medium text-gray-700">Status</label>
+                        <select
+                            name="status"
+                            value={filters.status} // Предполагается, что у вас есть состояние `filters` с полем `status`
+                            onChange={handleFilterChange}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        >
+                            {/* Пустой вариант для выбора по умолчанию */}
+                            <option value="">Barcha statuslar</option>
+
+                            {/* Динамическая генерация статусов */}
+                            {Object.entries(statusTranslations).map(([key, value]) => (
+                                <option key={key} value={key}>
+                                    {value}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
                         <label className="block text-sm font-medium text-gray-700">Gender Type</label>
                         <select
                             name="genderType"
@@ -213,58 +244,70 @@ export default function AdminUser() {
             </div>
 
             {/* Таблица пользователей */}
-            <div className="overflow-x-auto bg-[white] p-[20px] shadow-md rounded-lg">
-                <table className="w-full bg-white rounded-md overflow-hidden">
-                    <thead className="bg-gray-100">
-                        <tr>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">ID</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Name</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Passport series</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Phone Number</th>
-                            <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                        {data?.map((user) => (
-                            <tr key={user.id} className="hover:bg-gray-50">
-                                <td className="py-3 px-4 text-sm text-gray-700">{user.id}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{user.firstName} {user.lastName}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{user.passportSerialNumber}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700">{user.phoneNumber}</td>
-                                <td className="py-3 px-4 text-sm text-gray-700 space-x-2">
-                                    <button
-                                        className="bg-gray-300 text-white px-3 py-1 rounded hover:bg-gray-400"
-                                        onClick={() => {
-                                            setUserData(user);
-                                            setInfoModal(true);
-                                        }}
-                                    >
-                                        <IoEyeSharp className="text-[20px]" />
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            setEditModal(true);
-                                            setUserData(user);
-                                        }}
-                                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                                    >
-                                        <MdModeEdit className="text-[20px]" />
-                                    </button>
-                                    <button
-                                        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                                        onClick={() => {
-                                            setDeleteModal(true);
-                                            setUserData(user);
-                                        }}
-                                    >
-                                        <MdDelete className="text-[20px]" />
-                                    </button>
-                                </td>
+            {data?.length > 0 ? (
+                <div className="overflow-x-auto bg-[white] p-[20px] shadow-md rounded-lg">
+                    <table className="w-full bg-white rounded-md overflow-hidden">
+                        <thead className="bg-gray-100">
+                            <tr>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">ID</th>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Name</th>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Passport series</th>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Phone Number</th>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Status</th>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Register number</th>
+                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                            {data?.map((user) => (
+                                <tr key={user.id} className="hover:bg-gray-50">
+                                    <td className="py-3 px-4 text-sm text-gray-700">{user.id}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700">{user.firstName} {user.lastName}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700">{user.passportSerialNumber}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700">{user.phoneNumber}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700"> {statusTranslations[user.status] || "Noma'lum status"}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700">{user?.registrationNumber}</td>
+                                    <td className="py-3 px-4 text-sm text-gray-700 space-x-2">
+                                        <button
+                                            className="bg-gray-300 text-white px-3 py-1 rounded hover:bg-gray-400"
+                                            onClick={() => {
+                                                setUserData(user);
+                                                setInfoModal(true);
+                                            }}
+                                        >
+                                            <IoEyeSharp className="text-[20px]" />
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setEditModal(true);
+                                                setUserData(user);
+                                            }}
+                                            className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                                        >
+                                            <MdModeEdit className="text-[20px]" />
+                                        </button>
+                                        <button
+                                            className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                                            onClick={() => {
+                                                setDeleteModal(true);
+                                                setUserData(user);
+                                            }}
+                                        >
+                                            <MdDelete className="text-[20px]" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <div className="flex items-center justify-center mt-[50px]">
+                    <h1 className="font-bold text-[30px]">
+                        Ma'lumot y'oq
+                    </h1>
+                </div>
+            )}
 
             {/* Пагинация */}
             <div className="flex justify-center mt-6 space-x-2">
@@ -295,8 +338,6 @@ export default function AdminUser() {
                     Next
                 </button>
             </div>
-
-            {/* Модальные окна */}
             <AdminUserCreate refresh={() => fetchData(currentPage)} isOpen={createModal} onClose={() => setCreateModal(false)} />
             <AdminUserInfo isOpen={infoModal} onClose={() => setInfoModal(false)} data={userData} />
             <AdminUserEdit refresh={() => fetchData(currentPage)} isOpen={editModal} onClose={() => setEditModal(false)} data={userData} />

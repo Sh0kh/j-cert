@@ -77,11 +77,17 @@ export default function Clients() {
   return (
     <section id="clients" className="clients section light-background">
       <div className="section-two">
-        <div className="days">
+        <h2 className="head-two">Keyingi TEST sanasi</h2>
+
+        {/* <div className="days">
           <h1>{time.days}</h1>
           <p>DAYS</p>
-        </div>
+        </div> */}
         <div className="countdown">
+          <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="hours">
+            <h2>{time.days}</h2>
+            <p>DAYS</p>
+          </div>
           <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="hours">
             <h2>{time.hours}</h2>
             <p>HOURS</p>
@@ -95,9 +101,7 @@ export default function Clients() {
             <p>SECONDS</p>
           </div>
         </div>
-        <p id="until">UNTIL</p>
-        <h2 className="head-two">Keyingi TEST sanasi</h2>
-
+        <p className="mt-[25px]" id="until">Vaqt qoldi</p>
         {/* Slider */}
         <div className="slider-container">
           <div className="slider">

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "../utils/axios";
 import Swal from "sweetalert2";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../img/big-logo.jpg";
 
 const CheckPage = () => {
     const [scrolled, setScrolled] = useState(false);
+    const [date, setDate] = useState('')
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         registrationNumber: "", // Для первого поля (число)
-        dateBirth: "", // Для второго поля (дата рождения)
+        // dateBirth: "", // Для второго поля (дата рождения)
     });
 
     const handleChange = (e) => {
@@ -51,23 +53,30 @@ const CheckPage = () => {
         e.preventDefault();
 
         try {
-            // Формируем query string из formData
             const queryString = new URLSearchParams(formData).toString();
 
-            // Отправляем GET-запрос с query parameters
-            const response = await axios.get(`/sdg/uz/check?${queryString}`);
+            const response = await axios.post(`/sdg/uz/check?${queryString}`,);
 
-            // Показываем успешное уведомление
-            Swal.fire({
-                title: "Muvaffaqiyatli!",
-                text: "Natijangiz topildi.",
-                icon: "success",
-                confirmButtonText: "OK",
-            });
+            if (response?.data?.code === 200) {
+                Swal.fire({
+                    title: "Muvaffaqiyatli!",
+                    text: "Natijangiz topildi.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                });
+                setTimeout(() => {
+                    navigate(`/user/result/${response?.data?.object?.registrationNumber}`)
+                }, 3000)
+            } else {
+                Swal.fire({
+                    title: "Xatolik!",
+                    text: "Ma'lumotlarni tekshirib, qayta urinib ko'ring.",
+                    icon: "error",
+                    confirmButtonText: "OK",
+                });
+            }
         } catch (error) {
             console.error("Ошибка при отправке данных:", error);
-
-            // Показываем ошибку
             Swal.fire({
                 title: "Xatolik!",
                 text: "Ma'lumotlarni tekshirib, qayta urinib ko'ring.",
@@ -135,8 +144,8 @@ const CheckPage = () => {
                     <input
                         type="date"
                         name="dateBirth"
-                        value={formData.dateBirth}
-                        onChange={handleChange}
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
                         required
                         className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-indigo-500"
                     />

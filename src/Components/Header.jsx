@@ -39,7 +39,7 @@ export default function Header() {
               <NavLink to={'/portfolio'}>Postlar</NavLink>
             </li>
             <li>
-              <a href="#clients">Vaqt qoldi</a>
+              <a href="#clients">Test vaqti</a>
             </li>
             <li>
               <a href="#contact">Manzillar</a>

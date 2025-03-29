@@ -7,6 +7,7 @@ import ReactLoading from "react-loading";
 export default function AdminUserInfo({ isOpen, onClose, data }) {
     const [Foto, setFoto] = useState('');
     const [loading, setLoading] = useState(true)
+    const [fileId, setFileId] = useState('')
 
     const getFoto = async () => {
         try {
@@ -17,8 +18,25 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
             setFoto(imageUrl); // Сохраняем URL
         } catch (error) {
             console.log(error);
-        }finally{
+        } finally {
             setLoading(false)
+        }
+    };
+
+    const downloadFile = async (id) => {
+        try {
+            const response = await axios.get(`/sdg/uz/down/one/photo?hashId=${id}`, {
+                responseType: "blob",
+            });
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", data?.orginalName || "file");
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        } catch (error) {
+            console.error("Ошибка при скачивании файла:", error);
         }
     };
 
@@ -106,6 +124,24 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
                                     <div>
                                         <p className="text-sm font-medium text-gray-500">Registration Number</p>
                                         <p className="text-sm text-gray-700">{data?.registrationNumber}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-500">Passport Serial Number</p>
+                                        <p className="text-sm text-gray-700">{data?.passportSerialNumber || "Not provided"}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-gray-700 mb-1">File Information</h3>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-500">Result</p>
+                                        <button
+                                            // onClick={(id)=>downloadFile(data?.resultId?.)}
+                                            className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                                        >
+                                            Faylni yuklab olish
+                                        </button>
                                     </div>
                                     <div>
                                         <p className="text-sm font-medium text-gray-500">Passport Serial Number</p>

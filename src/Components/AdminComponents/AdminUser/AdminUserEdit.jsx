@@ -55,10 +55,20 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                 passportSerialNumber: data.passportSerialNumber || "",
                 password: "",
                 password02: "",
-                // paymentCheckId: data.paymentCheckId || 0,
+                resultId: {
+                    extension: data?.resultId?.extension,
+                    id: data?.resultId?.id,
+                    name: data?.resultId?.name,
+                    size: data?.resultId?.size
+                },
+                accessPermissionId: {
+                    extension: data?.accessPermissionId?.extension,
+                    id: data?.accessPermissionId?.id,
+                    name: data?.accessPermissionId?.name,
+                    size: data?.accessPermissionId?.size
+                },
                 phoneNumber: data.phoneNumber || "",
                 registrationNumber: data.registrationNumber || "",
-                // resultId: data.resultId || 0,
                 status: data.status || "DONE",
                 avatarId: {
                     extension: data?.avatarId?.extension,
@@ -71,16 +81,31 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                     id: data?.paymentCheckId?.id,
                     name: data?.paymentCheckId?.name,
                     size: data?.paymentCheckId?.size
+                },
+                tiltulId01: {
+                    extension: data?.tiltulId01?.extension,
+                    id: data?.tiltulId01?.id,
+                    name: data?.tiltulId01?.name,
+                    size: data?.tiltulId01?.size
+                },
+                tiltulId02: {
+                    extension: data?.tiltulId02?.extension,
+                    id: data?.tiltulId02?.id,
+                    name: data?.tiltulId02?.name,
+                    size: data?.tiltulId02?.size
+                },
+                tiltulId03: {
+                    extension: data?.tiltulId03?.extension,
+                    id: data?.tiltulId03?.id,
+                    name: data?.tiltulId03?.name,
+                    size: data?.tiltulId03?.size
                 }
-
             });
         }
     }, [data]);
 
     const handleChange = async (e) => {
         const { name, files } = e.target;
-
-        // Обновляем состояние формы
         setFormData((prevData) => ({
             ...prevData,
             [name]: files ? files[0] : e.target.value,
@@ -97,7 +122,7 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
         try {
             const formDataToSend = new FormData();
             formDataToSend.append("file", file);
-            formDataToSend.append("category", fieldName);
+            formDataToSend.append("category", fieldName === 'user_result' || fieldName === 'user_access' || fieldName === 'tiltulId01' || fieldName === 'tiltulId02' || fieldName === 'tiltulId03' ? 'user_document' : fieldName);
             formDataToSend.append("userId", '1');
 
             // Отправляем запрос на бэкенд
@@ -120,6 +145,61 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                 setFormData((prevData) => ({
                     ...prevData,
                     paymentCheckId: {
+                        id: response?.data?.object?.id,
+                        extension: response?.data?.object?.extension,
+                        name: response?.data?.object?.name,
+                        size: response?.data?.object?.size,
+                    },
+                }));
+            }
+            else if (fieldName === 'user_result') {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    resultId: {
+                        id: response?.data?.object?.id,
+                        extension: response?.data?.object?.extension,
+                        name: response?.data?.object?.name,
+                        size: response?.data?.object?.size,
+                    },
+                }));
+            }
+            else if (fieldName === 'user_access') {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    accessPermissionId: {
+                        id: response?.data?.object?.id,
+                        extension: response?.data?.object?.extension,
+                        name: response?.data?.object?.name,
+                        size: response?.data?.object?.size,
+                    },
+                }));
+            }
+            else if (fieldName === 'tiltulId01') {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    tiltulId01: {
+                        id: response?.data?.object?.id,
+                        extension: response?.data?.object?.extension,
+                        name: response?.data?.object?.name,
+                        size: response?.data?.object?.size,
+                    },
+                }));
+            }
+            else if (fieldName === 'tiltulId02') {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    tiltulId02: {
+                        id: response?.data?.object?.id,
+                        extension: response?.data?.object?.extension,
+                        name: response?.data?.object?.name,
+                        size: response?.data?.object?.size,
+                    },
+                }));
+            }
+            else if (fieldName === 'tiltulId03') {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    tiltulId03: {
                         id: response?.data?.object?.id,
                         extension: response?.data?.object?.extension,
                         name: response?.data?.object?.name,
@@ -153,7 +233,7 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                 toast: true,
                 showConfirmButton: false,
             });
-        }finally{
+        } finally {
             setLoading(false)
         }
     };
@@ -334,8 +414,6 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                             />
                         </div>
                     </div>
-
-                    {/* Registration Number and Payment Check ID */}
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Registration Number</label>
@@ -361,7 +439,7 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                                 accept="image/*"
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
-                                required
+
                             />
                         </div>
                         {/* Payment Check File */}
@@ -375,9 +453,69 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                                 accept=".pdf,.jpg,.jpeg,.png" // Разрешенные форматы файлов
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
-                                required
+
                             />
                         </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium mb-2">
+                                Natijan
+                            </label>
+                            <input
+                                type="file"
+                                name="user_result"
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <label className="block text-sm font-medium mb-2">
+                                Access Permission
+                            </label>
+                            <input
+                                type="file"
+                                name="user_access"
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+
+                            />
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium mb-2">
+                                TiltulId01
+                            </label>
+                            <input
+                                type="file"
+                                name="tiltulId01"
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <label className="block text-sm font-medium mb-2">
+                                TiltulId02
+                            </label>
+                            <input
+                                type="file"
+                                name="tiltulId02"
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                            />
+                        </div>
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium mb-2">
+                            TiltulId03
+                        </label>
+                        <input
+                            type="file"
+                            name="tiltulId03"
+                            onChange={handleChange}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
+                        />
                     </div>
 
                     {/* Submit Button */}

@@ -1,5 +1,5 @@
 const CONFIG = {
-    API_URL: 'http://j-sert.uz',
+    API_URL: 'https://j-sert.uz',
   };
   
   export default CONFIG;

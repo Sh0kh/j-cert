@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import SmallModal from "../UI/Modals/SmallModal";
 
 export default function RegisterInfoModal({ isOpen, onClose, data }) {
@@ -22,12 +23,14 @@ export default function RegisterInfoModal({ isOpen, onClose, data }) {
                 </div>
 
                 {/* Кнопка закрытия */}
-                <button
-                    onClick={onClose}
-                    className="mt-6 px-6 py-2 bg-[#28a745] text-white rounded-lg hover:bg-green-700 transition duration-300"
-                >
-                    Yopish
-                </button>
+                <NavLink to={'/'}>
+                    <button
+                        onClick={onClose}
+                        className="mt-6 px-6 py-2 bg-[#28a745] text-white rounded-lg hover:bg-green-700 transition duration-300"
+                    >
+                        Yopish
+                    </button>
+                </NavLink>
             </div>
         </SmallModal>
     );
