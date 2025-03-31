@@ -19,7 +19,7 @@ export default function UserInfo() {
     // Функция для скачивания файла
     const downloadFile = async (hashId, fileName) => {
         try {
-            const response = await axios.get(`/sdg/uz/down/one/photo?hashId=${hashId}`, {
+            const response = await axios.get(`/sdg/uz/down/one/photo?id=${hashId}`, {
                 responseType: "blob", // Blob javobini kutamiz
             });
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -55,7 +55,7 @@ export default function UserInfo() {
 
             {/* Карточка с информацией */}
             <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md space-y-6">
-   
+
 
                 {/* Кнопки для скачивания */}
                 {data.resultId && data.resultId.id ? (
@@ -66,9 +66,7 @@ export default function UserInfo() {
                         >
                             Imtihon natijasini yuklab oling
                         </button>
-                        <p className="text-sm text-gray-600 text-center">
-                            Imtihon kogozini yuklab oling va imtihon vaqti o'zingiz bilan olib boring.
-                        </p>
+                       
                     </div>
                 ) : data.accessPermissionId && data.accessPermissionId.id ? (
                     <div className="space-y-4">
@@ -87,8 +85,16 @@ export default function UserInfo() {
                 ) : (
                     <div className="text-center">
                         <p className="text-gray-700">
-                            Imtihon natijalari hali tayyorlanmoqda. Adminlarimiz mazkur muammo ustida ishlayapti.
+                            So‘rovingiz ko‘rib chiqilmoqda. Iltimos, kuting.
                         </p>
+                        <a
+                            className="flex items-center justify-center gap-[5px]"
+                            href="https://t.me/j_certuzbekistan" target="_blank" rel="noopener noreferrer">
+                            <svg className="text-[30px] " xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M11.994 2a10 10 0 1 0 10 10a10 10 0 0 0-10-10m3.18 15.152a.705.705 0 0 1-1.002.352l-2.715-2.11l-1.742 1.608a.3.3 0 0 1-.285.039l.334-2.989l.01.009l.007-.059s4.885-4.448 5.084-4.637c.202-.189.135-.23.135-.23c.012-.23-.361 0-.361 0l-6.473 4.164l-2.695-.918s-.414-.148-.453-.475c-.041-.324.466-.5.466-.5l10.717-4.258s.881-.392.881.258Z"></path></svg>
+                            <span className="text-[20px]">
+                                Telegtam
+                            </span>
+                        </a>
                     </div>
                 )}
             </div>

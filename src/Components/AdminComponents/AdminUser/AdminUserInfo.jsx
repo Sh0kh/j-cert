@@ -25,7 +25,7 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
 
     const downloadFile = async (id) => {
         try {
-            const response = await axios.get(`/sdg/uz/down/one/photo?hashId=${id}`, {
+            const response = await axios.get(`/sdg/uz/down/one/photo?id=${id}`, {
                 responseType: "blob",
             });
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -137,17 +137,34 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
                                     <div>
                                         <p className="text-sm font-medium text-gray-500">Result</p>
                                         <button
-                                            // onClick={(id)=>downloadFile(data?.resultId?.)}
+                                            onClick={(id) => downloadFile(data?.resultId?.id)}
                                             className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
                                         >
                                             Faylni yuklab olish
                                         </button>
                                     </div>
                                     <div>
-                                        <p className="text-sm font-medium text-gray-500">Passport Serial Number</p>
-                                        <p className="text-sm text-gray-700">{data?.passportSerialNumber || "Not provided"}</p>
+                                        <p className="text-sm font-medium text-gray-500">Access Permission</p>
+                                        <button
+                                            onClick={(id) => downloadFile(data?.accessPermissionId?.id)}
+                                            className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                                        >
+                                            Faylni yuklab olish
+                                        </button>
                                     </div>
                                 </div>
+                                <div className="grid grid-cols-2 gap-4 mt-[20px]">
+                                    <div>
+                                        <p className="text-sm font-medium text-gray-500">Payment Check</p>
+                                        <button
+                                            onClick={(id) => downloadFile(data?.paymentCheckId?.id)}
+                                            className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                                        >
+                                            Faylni yuklab olish
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

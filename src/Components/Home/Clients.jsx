@@ -5,37 +5,40 @@ import img3 from "../../img/photo (8).jpg";
 import axios from "axios";
 
 export default function Clients() {
-
-
-
-  const [data, setData] = useState('')
+  const [data, setData] = useState('');
   const [time, setTime] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
   });
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [img1, img2, img3];
 
-
   const fetchData = async () => {
     try {
-      const response = await axios.get(`/sdg/uz/test/date/get`)
-      setData(response?.data?.object)
+      const response = await axios.get(`/sdg/uz/test/date/get`);
+      setData(response?.data?.object);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+  };
 
   useEffect(() => {
-    const countdownDate = new Date(data || '2025-05-10T18:52:00').getTime();
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // Only start the countdown if data is available
+    if (!data) return;
+
+    const countdownDate = new Date(data).getTime();
+
+    // Check if the date is valid
+    if (isNaN(countdownDate)) {
+      console.error("Invalid date format:", data);
+      return;
+    }
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -55,16 +58,16 @@ export default function Clients() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [data]); // Only run when data changes
 
-  // Sliderni avtomatik harakatlantirish
+  // Auto-rotate slider
   useEffect(() => {
     const sliderInterval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Har 3 soniyada o‘zgaradi
+    }, 5000); // Changes every 5 seconds
 
     return () => clearInterval(sliderInterval);
-  }, []);
+  }, [images.length]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -78,11 +81,6 @@ export default function Clients() {
     <section id="clients" className="clients section light-background">
       <div className="section-two">
         <h2 className="head-two">Keyingi TEST sanasi</h2>
-
-        {/* <div className="days">
-          <h1>{time.days}</h1>
-          <p>DAYS</p>
-        </div> */}
         <div className="countdown">
           <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="hours">
             <h2>{time.days}</h2>
