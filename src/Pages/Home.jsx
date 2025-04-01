@@ -7,15 +7,33 @@ import Four from "../Components/Home/Four";
 import Five from "../Components/Home/Five";
 import Contact from "../Components/Home/Contact";
 import Top from "../Components/Top"; // Import qildik
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+    const [data, setData] = useState('');
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`/sdg/uz/test/date/get`);
+            setData(response?.data?.object);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
     return (
         <div>
             <Hero />
-            <Clients />
+            <Clients data={data}/>
             <About />
             <Stats />
-            <Why />
+            <Why data={data}/>
             <Four />
             <Five />
             <Contact />
