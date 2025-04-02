@@ -3,11 +3,13 @@ import axios from "../utils/axios";
 import Swal from "sweetalert2";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../img/big-logo.jpg";
+import HeaderModal from "../Components/HeaderModal";
 
 const CheckPage = () => {
     const [scrolled, setScrolled] = useState(false);
     const [date, setDate] = useState('')
     const navigate = useNavigate()
+    const [modal, setModal] = useState(false)
 
     const [formData, setFormData] = useState({
         registrationNumber: "", // Для первого поля (число)
@@ -107,13 +109,14 @@ const CheckPage = () => {
                                 <NavLink to={'/portfolio'}>Postlar</NavLink>
                             </li>
                         </ul>
-                        <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                        <i onClick={()=>setModal(true)} className="mobile-nav-toggle d-xl-none bi bi-list"></i>
                     </nav>
                     <NavLink className={'btn-getstarted'} to={'/register'}>
                         Ro'yxatdan o'tish
                     </NavLink>
                 </div>
             </header>
+            <HeaderModal isOpen={modal} onClose={()=>setModal(false)}/>
             <div className="w-full max-w-md p-8 bg-gray-50 rounded-lg shadow-lg space-y-6">
                 {/* Заголовок */}
                 <h1 className="text-3xl font-bold text-center text-gray-800">

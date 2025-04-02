@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import logo from "../img/big-logo.jpg";
 import { NavLink } from "react-router-dom";
+import HeaderModal from "./HeaderModal";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,14 +48,14 @@ export default function Header() {
                 <a href="#contact">Manzillar</a>
               </li>
             </ul>
-            <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            <i onClick={()=>setModal(true)} className="mobile-nav-toggle d-xl-none bi bi-list"></i>
           </nav>
           <NavLink className={'btn-getstarted'} to={'/register'}>
             Ro'yxatdan o'tish
           </NavLink>
         </div>
       </header>
-      
+      <HeaderModal isOpen={modal} onClose={()=>setModal(false)}/>
     </>
   );
 }

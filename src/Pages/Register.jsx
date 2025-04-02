@@ -5,6 +5,7 @@ import RegisterInfoModal from "../Components/Register/RegisterInfoModal";
 import { NavLink } from "react-router-dom";
 import logo from "../img/big-logo.jpg";
 import FileUploadInfoModal from "../Components/Register/FileUploadInfoModal";
+import HeaderModal from "../Components/HeaderModal";
 
 
 export default function Register() {
@@ -12,7 +13,7 @@ export default function Register() {
     const [infoModal, setInfoModal] = useState(false)
     const [infoData, setInfoData] = useState([])
     const [fileUploadInfoModal, setFileUploadInfoModal] = useState(false)
-
+    const [Modal, setModal] = useState(false)
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -244,14 +245,14 @@ export default function Register() {
                                 <NavLink to={'/portfolio'}>Postlar</NavLink>
                             </li>
                         </ul>
-                        <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                        <i onClick={()=>setModal(true)} className="mobile-nav-toggle d-xl-none bi bi-list"></i>
                     </nav>
                     <NavLink className={'btn-getstarted'} to={'/register'}>
                         Ro'yxatdan o'tish
                     </NavLink>
                 </div>
             </header>
-
+            <HeaderModal isOpen={Modal} onClose={()=>setModal(false)}/>
             <form
                 onSubmit={register}
                 className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"

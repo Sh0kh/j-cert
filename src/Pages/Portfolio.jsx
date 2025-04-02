@@ -8,9 +8,11 @@ import logo from "../img/big-logo.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { NavLink } from "react-router-dom";
+import HeaderModal from "../Components/HeaderModal";
 
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
+  const [modal, setModal] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,13 +56,14 @@ export default function Portfolio() {
                 <NavLink to={'/portfolio'}>Postlar</NavLink>
               </li>
             </ul>
-            <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            <i onClick={()=>setModal(true)} className="mobile-nav-toggle d-xl-none bi bi-list"></i>
           </nav>
           <NavLink className={'btn-getstarted'} to={'/register'}>
             Ro'yxatdan o'tish
           </NavLink>
         </div>
       </header>
+      <HeaderModal isOpen={modal} onClose={()=>setModal(false)}/>
       <main className="main">
         <div className="page-title light-background">
           <div className="container">
