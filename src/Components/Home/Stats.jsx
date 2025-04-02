@@ -10,16 +10,16 @@ export default function Stats() {
 
   useEffect(() => {
     const targets = {
-      clients: 232,
-      projects: 521,
-      supportHours: 1453,
-      workers: 32,
+      clients: 250,
+      projects: 8,
+      supportHours: 24 / 7,
+      workers: 5,
     };
 
     const duration = 2000; // 2 soniya ichida to‘liq hisob
     const steps = 50; // 50 qadamda o‘sish
     const interval = duration / steps;
-    
+
     let step = 0;
     const counter = setInterval(() => {
       step++;

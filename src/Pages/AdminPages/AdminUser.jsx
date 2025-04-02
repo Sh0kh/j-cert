@@ -171,9 +171,7 @@ export default function AdminUser() {
                             onChange={handleFilterChange}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         >
-                            <option value="ADMIN">Admin</option>
                             <option value="STUDENT">Student</option>
-                            <option value="SUPER_ADMIN">Super Admin</option>
                         </select>
                     </div>
                     <div>

@@ -30,14 +30,14 @@ export default function Home() {
     return (
         <div>
             <Hero />
-            <Clients data={data}/>
+            <Clients data={data} />
             <About />
             <Stats />
-            <Why data={data}/>
+            <Why data={data} />
             <Four />
             <Five />
             <Contact />
-            <Top /> {/* Scroll to Top tugmasini qo‘shdik */}
+            <Top />
         </div>
     );
 }

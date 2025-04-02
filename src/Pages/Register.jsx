@@ -324,7 +324,7 @@ export default function Register() {
                         <option value="Toshkent">Toshkent</option>
                         <option value="Sirdaryo">Sirdaryo</option>
                         <option value="Samarqand">Samarqand</option>
-                        <option value="Buxoro">Buxoro</option>
+                        <option value="Andijon">Andijon</option>
                         <option value="Namangan">Namangan</option>
                     </select>
                 </div>
