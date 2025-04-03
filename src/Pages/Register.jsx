@@ -62,12 +62,15 @@ export default function Register() {
 
 
     const handleChange = async (e) => {
-        const { name, files } = e.target;
+        const { name, files, value } = e.target;
 
-        // Обновляем состояние формы
+        // Если это текстовое поле, преобразуем его в верхний регистр
+        const newValue = files ? files[0] : (typeof value === 'string' ? value.toUpperCase() : value);
+
+        // Обновляем состояние формы с преобразованным значением
         setFormData((prevData) => ({
             ...prevData,
-            [name]: files ? files[0] : e.target.value,
+            [name]: newValue,
         }));
 
         // Если загружен файл, отправляем его на бэкенд
@@ -75,6 +78,7 @@ export default function Register() {
             await uploadFile(name, files[0]);
         }
     };
+
 
 
 
@@ -245,14 +249,14 @@ export default function Register() {
                                 <NavLink to={'/portfolio'}>Postlar</NavLink>
                             </li>
                         </ul>
-                        <i onClick={()=>setModal(true)} className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                        <i onClick={() => setModal(true)} className="mobile-nav-toggle d-xl-none bi bi-list"></i>
                     </nav>
                     <NavLink className={'btn-getstarted'} to={'/register'}>
                         Ro'yxatdan o'tish
                     </NavLink>
                 </div>
             </header>
-            <HeaderModal isOpen={Modal} onClose={()=>setModal(false)}/>
+            <HeaderModal isOpen={Modal} onClose={() => setModal(false)} />
             <form
                 onSubmit={register}
                 className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg"
