@@ -60,25 +60,23 @@ export default function Register() {
     }, []);
 
 
-
     const handleChange = async (e) => {
-        const { name, files, value } = e.target;
+        const { name, files, value, type } = e.target;
 
-        // Если это текстовое поле, преобразуем его в верхний регистр
-        const newValue = files ? files[0] : (typeof value === 'string' ? value.toUpperCase() : value);
+        // Apply uppercase only to text inputs, not to select dropdowns
+        const newValue = files
+            ? files[0]
+            : (typeof value === 'string' && type === 'text' ? value.toUpperCase() : value);
 
-        // Обновляем состояние формы с преобразованным значением
         setFormData((prevData) => ({
             ...prevData,
             [name]: newValue,
         }));
 
-        // Если загружен файл, отправляем его на бэкенд
         if (files && files.length > 0) {
             await uploadFile(name, files[0]);
         }
     };
-
 
 
 
@@ -443,7 +441,12 @@ export default function Register() {
                         htmlFor="user_avatar"
                         className="w-full px-4 py-2 bg-[#009970] text-white text-center rounded cursor-pointer hover:bg-[#32c29c] transition duration-300"
                     >
-                        {formData?.user_avatar ? 'Fayl yuklandi' : 'Yuklash'}
+                        {formData?.user_avatar ? (
+                            <>
+                                <span className="mr-2">✅</span>
+                                Fayl yuklandi
+                            </>
+                        ) : 'Yuklash'}
                     </label>
                 </div>
                 {/* Payment Check File */}
@@ -469,7 +472,12 @@ export default function Register() {
                             htmlFor="user_document"
                             className="w-full px-4 py-2 bg-[#009970] text-white text-center rounded cursor-pointer hover:bg-[#32c29c] transition duration-300"
                         >
-                            {formData?.user_document ? 'Fayl yuklandi' : 'Yuklash'}
+                            {formData?.user_document ? (
+                                <>
+                                    <span className="mr-2">✅</span>
+                                    Fayl yuklandi
+                                </>
+                            ) : 'Yuklash'}
                         </label>
                         <span onClick={() => setFileUploadInfoModal(true)} className="text-gray-500 hover:bg-[#009970] hover:text-[white] p-[7px] duration-300 rounded-[50%]">
                             <svg
