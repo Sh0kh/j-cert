@@ -19,7 +19,7 @@ export default function Register() {
         firstName: "",
         lastName: "",
         birthDate: "",
-        deliveryPlace: "",
+        testLocation: "",
         phoneNumber: "",
         gender: "",
         passportSeries: "",
@@ -152,7 +152,8 @@ export default function Register() {
                 genderType: formData?.gender,
                 dateBirth: formData?.birthDate,
                 status: 'REGISTERED',
-                registrationNumber: formData?.deliveryPlace,
+                testLocation:formData?.testLocation,
+                // registrationNumber: formData?.deliveryPlace,
                 phoneNumber: `+998${formData?.phoneNumber}`,
                 passportSerialNumber: formData?.passportSeries,
                 avatarId: {
@@ -317,8 +318,8 @@ export default function Register() {
                         Topshirish joyi
                     </label>
                     <select
-                        name="deliveryPlace"
-                        value={formData.deliveryPlace}
+                        name="testLocation"
+                        value={formData.testLocation}
                         onChange={handleChange}
                         className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500"
                         required

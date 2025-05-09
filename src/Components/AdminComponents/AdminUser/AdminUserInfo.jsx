@@ -3,41 +3,29 @@ import NormalModal from "../../UI/Modals/NormalModal";
 import { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 
-
 export default function AdminUserInfo({ isOpen, onClose, data }) {
     const [Foto, setFoto] = useState('');
-    const [loading, setLoading] = useState(true)
-    const [fileId, setFileId] = useState('')
+    const [loading, setLoading] = useState(true);
+    console.log(data);
 
     const getFoto = async () => {
         try {
             const response = await axios.get(`/sdg/uz/view/one/photo?id=${data?.avatarId?.id}`, {
-                responseType: 'blob' // Предполагаем, что сервер возвращает Blob
+                responseType: 'blob'
             });
-            const imageUrl = URL.createObjectURL(response.data); // Преобразуем Blob в URL
-            setFoto(imageUrl); // Сохраняем URL
+            const imageUrl = URL.createObjectURL(response.data);
+            setFoto(imageUrl);
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     };
 
-    const downloadFile = async (id) => {
-        try {
-            const response = await axios.get(`/sdg/uz/down/one/photo?id=${id}`, {
-                responseType: "blob",
-            });
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement("a");
-            link.href = url;
-            link.setAttribute("download", data?.orginalName || "file");
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-        } catch (error) {
-            console.error("Ошибка при скачивании файла:", error);
-        }
+    // Функция для конвертации байтов в мегабайты
+    const bytesToMB = (bytes) => {
+        if (!bytes) return '0 MB';
+        return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
     };
 
     useEffect(() => {
@@ -54,7 +42,6 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
         };
     }, [Foto]);
 
-
     return (
         <NormalModal isOpen={isOpen} onClose={onClose}>
             <div className="p-6 bg-white rounded-lg shadow-lg h-[1] w-full">
@@ -63,7 +50,7 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
                         <ReactLoading type="spinningBubbles" color="black" height={80} width={80} />
                     </div>
                 ) : (
-                    <div >
+                    <div>
                         <h2 className="text-xl font-bold mb-4">User Information</h2>
                         <div className="flex items-center justify-center w-full my-[10px]">
                             <img
@@ -136,35 +123,85 @@ export default function AdminUserInfo({ isOpen, onClose, data }) {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <p className="text-sm font-medium text-gray-500">Result</p>
-                                        <button
-                                            onClick={(id) => downloadFile(data?.resultId?.id)}
-                                            className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
-                                        >
-                                            Faylni yuklab olish
-                                        </button>
+                                        {data?.resultId?.id ? (
+                                            <div>
+
+                                                <a
+                                                    className="mt-2 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                                                    href={`https://j-sert.uz/sdg/uz/down/one/photo?id=${data.resultId.id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Faylni yuklab olish
+                                                </a>
+                                                <p className="text-sm text-gray-500 mb-1">
+                                                    {bytesToMB(data.resultId.size)} • {data.resultId.extension}
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                className="mt-6 w-full py-2 bg-gray-300 text-gray-500 font-semibold rounded-md text-center block opacity-50 cursor-not-allowed"
+                                                disabled
+                                            >
+                                                Fayl mavjud emas
+                                            </button>
+                                        )}
                                     </div>
                                     <div>
                                         <p className="text-sm font-medium text-gray-500">Access Permission</p>
-                                        <button
-                                            onClick={(id) => downloadFile(data?.accessPermissionId?.id)}
-                                            className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
-                                        >
-                                            Faylni yuklab olish
-                                        </button>
+                                        {data?.accessPermissionId?.id ? (
+                                            <div>
+
+                                                <a
+                                                    className="mt-2 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                                                    href={`https://j-sert.uz/sdg/uz/down/one/photo?id=${data.accessPermissionId.id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Faylni yuklab olish
+                                                </a>
+                                                <p className="text-sm text-gray-500 mb-1">
+                                                    {bytesToMB(data.accessPermissionId.size)} • {data.accessPermissionId.extension}
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                className="mt-6 w-full py-2 bg-gray-300 text-gray-500 font-semibold rounded-md text-center block opacity-50 cursor-not-allowed"
+                                                disabled
+                                            >
+                                                Fayl mavjud emas
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4 mt-[20px]">
                                     <div>
                                         <p className="text-sm font-medium text-gray-500">Payment Check</p>
-                                        <button
-                                            onClick={(id) => downloadFile(data?.paymentCheckId?.id)}
-                                            className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
-                                        >
-                                            Faylni yuklab olish
-                                        </button>
+                                        {data?.paymentCheckId?.id ? (
+                                            <div>
+
+                                                <a
+                                                    className="mt-2 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                                                    href={`https://j-sert.uz/sdg/uz/down/one/photo?id=${data.paymentCheckId.id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    Faylni yuklab olish
+                                                </a>
+                                                <p className="text-sm text-gray-500 mb-1">
+                                                    {bytesToMB(data.paymentCheckId.size)} • {data.paymentCheckId.extension}
+                                                </p>
+                                            </div>
+                                        ) : (
+                                            <button
+                                                className="mt-6 w-full py-2 bg-gray-300 text-gray-500 font-semibold rounded-md text-center block opacity-50 cursor-not-allowed"
+                                                disabled
+                                            >
+                                                Fayl mavjud emas
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

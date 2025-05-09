@@ -30,6 +30,7 @@ export default function AdminUser() {
         phoneNumber: "",
         firstName: "",
         lastName: "",
+        testLocation: '',
         accountType: "STUDENT",
         genderType: '',
         passportSerialNumber: '',
@@ -163,15 +164,23 @@ export default function AdminUser() {
                     </div>
 
                     {/* Account Type */}
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Account Type</label>
+
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">
+                            Topshirish joyi
+                        </label>
                         <select
-                            name="accountType"
-                            value={filters.accountType}
+                            name="testLocation"
+                            value={filters.testLocation}
                             onChange={handleFilterChange}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
                         >
-                            <option value="STUDENT">Student</option>
+                            <option value="">Tanlang</option>
+                            <option value="Toshkent">Toshkent</option>
+                            <option value="Sirdaryo">Sirdaryo</option>
+                            <option value="Samarqand">Samarqand</option>
+                            <option value="Andijon">Andijon</option>
+                            <option value="Namangan">Namangan</option>
                         </select>
                     </div>
                     <div>
@@ -247,25 +256,53 @@ export default function AdminUser() {
                     <table className="w-full bg-white rounded-md overflow-hidden">
                         <thead className="bg-gray-100">
                             <tr>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">ID</th>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Name</th>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Passport series</th>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Phone Number</th>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Status</th>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Register number</th>
-                                <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Actions</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">ID</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Name</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Passport series</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Phone Number</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Status</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Location</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Register number</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Result</th>
+                                <th className="py-3 px-2 text-center  text-[15px] font-semibold text-gray-700">Acess</th>
+                                <th className="py-3 px-2 text-center text-[15px] font-semibold text-gray-700">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                             {data?.map((user) => (
                                 <tr key={user.id} className="hover:bg-gray-50">
-                                    <td className="py-3 px-4 text-sm text-gray-700">{user.id}</td>
-                                    <td className="py-3 px-4 text-sm text-gray-700">{user.firstName} {user.lastName}</td>
-                                    <td className="py-3 px-4 text-sm text-gray-700">{user.passportSerialNumber}</td>
-                                    <td className="py-3 px-4 text-sm text-gray-700">{user.phoneNumber}</td>
-                                    <td className="py-3 px-4 text-sm text-gray-700"> {statusTranslations[user.status] || "Noma'lum status"}</td>
-                                    <td className="py-3 px-4 text-sm text-gray-700">{user?.registrationNumber}</td>
-                                    <td className="py-3 px-4 text-sm text-gray-700 space-x-2">
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700">{user.id}</td>
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700">{user.firstName} {user.lastName}</td>
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700">{user.passportSerialNumber}</td>
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700">{user.phoneNumber}</td>
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700"> {statusTranslations[user.status] || "Noma'lum status"}</td>
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700">{user?.testLocation}</td>
+                                    <td className="py-3 text-center px-1 text-[12px] text-gray-700">{user?.registrationNumber}</td>
+                                    <td className="py-3 px-1 text-[12px] text-gray-700">
+                                        <div className="flex items-center justify-center">
+                                            {user?.resultId?.id === null || user?.resultId === null ? (<svg
+                                                className="text-[15px] text-[red]"
+                                                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m13.5.5l-13 13m0-13l13 13" strokeWidth={1}></path></svg>) : (<svg className="text-[20px] text-[green] " xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41z"></path></svg>)}
+                                        </div>
+                                    </td>
+
+
+
+
+                                    <td className="py-3   px-1 text-[12px] text-gray-700">
+                                        <div className="flex items-center justify-center">
+                                            {user?.accessPermissionId?.id === null || user?.accessPermissionId === null ? (<svg
+                                                className="text-[15px] text-[red]"
+                                                xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" d="m13.5.5l-13 13m0-13l13 13" strokeWidth={1}></path></svg>) : (<svg className="text-[20px] text-[green]" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41z"></path></svg>)}
+                                        </div>
+                                    </td>
+
+
+
+
+
+
+                                    <td className="py-3 text-center px-4 text-sm text-gray-700 space-x-2">
                                         <button
                                             className="bg-gray-300 text-white px-3 py-1 rounded hover:bg-gray-400"
                                             onClick={() => {
@@ -273,7 +310,7 @@ export default function AdminUser() {
                                                 setInfoModal(true);
                                             }}
                                         >
-                                            <IoEyeSharp className="text-[20px]" />
+                                            <IoEyeSharp className="text-[18px]" />
                                         </button>
                                         <button
                                             onClick={() => {
@@ -282,7 +319,7 @@ export default function AdminUser() {
                                             }}
                                             className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                                         >
-                                            <MdModeEdit className="text-[20px]" />
+                                            <MdModeEdit className="text-[18px]" />
                                         </button>
                                         <button
                                             className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
@@ -291,7 +328,7 @@ export default function AdminUser() {
                                                 setUserData(user);
                                             }}
                                         >
-                                            <MdDelete className="text-[20px]" />
+                                            <MdDelete className="text-[18px]" />
                                         </button>
                                     </td>
                                 </tr>

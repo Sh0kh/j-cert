@@ -18,20 +18,33 @@ const Login = () => {
         }
       });
 
-      localStorage.setItem("token", response.data.token);
-      navigate("/admin/home");
-
-      Swal.fire({
-        title: "Success!",
-        text: "You have successfully logged in.",
-        icon: "success",
-        position: "top-end",
-        timer: 3000,
-        timerProgressBar: true,
-        showCloseButton: true,
-        toast: true,
-        showConfirmButton: false,
-      });
+      if (response?.data?.code === 200) {
+        localStorage.setItem("token", response.data.token);
+        navigate("/admin/home");
+        Swal.fire({
+          title: "Success!",
+          text: "You have successfully logged in.",
+          icon: "success",
+          position: "top-end",
+          timer: 3000,
+          timerProgressBar: true,
+          showCloseButton: true,
+          toast: true,
+          showConfirmButton: false,
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: error.response?.data?.message || "An error occurred.",
+          icon: "error",
+          position: "top-end",
+          timer: 3000,
+          timerProgressBar: true,
+          showCloseButton: true,
+          toast: true,
+          showConfirmButton: false,
+        });
+      }
     } catch (error) {
       Swal.fire({
         title: "Error!",

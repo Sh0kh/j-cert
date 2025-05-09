@@ -21,6 +21,7 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
         passportSerialNumber: "",
         password: "",
         password02: "",
+        testLocation: "",
         // paymentCheckId: 0,
         phoneNumber: "",
         registrationNumber: "",
@@ -425,7 +426,24 @@ export default function AdminUserEdit({ isOpen, onClose, data, refresh }) {
                                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             />
                         </div>
-
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Topshirish joyi
+                            </label>
+                            <select
+                                name="testLocation"
+                                value={formData.testLocation}
+                                onChange={handleChange}
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
+                            >
+                                <option value="">Tanlang</option>
+                                <option value="Toshkent">Toshkent</option>
+                                <option value="Sirdaryo">Sirdaryo</option>
+                                <option value="Samarqand">Samarqand</option>
+                                <option value="Andijon">Andijon</option>
+                                <option value="Namangan">Namangan</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div className="flex items-center justify-between">

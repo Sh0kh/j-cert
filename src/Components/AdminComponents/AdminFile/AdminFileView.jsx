@@ -7,6 +7,7 @@ export default function AdminFileView({ data, isOpen, onClose }) {
     // Состояния для хранения данных
     const [viewFoto, setViewFoto] = useState(null); // Base64 изображения
 
+
     // Функция для форматирования размера файла
     const formatFileSize = (sizeInBytes) => {
         if (!sizeInBytes) return "N/A";
@@ -114,18 +115,22 @@ export default function AdminFileView({ data, isOpen, onClose }) {
                                     d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                                 />
                             </svg>
-                            <p className="mt-2 text-sm text-gray-500">Bu fayl ko'rsatilmaydi</p>
+                            <p className="mt-2 text-sm text-gray-500">{data?.extension} ko'rsatilmaydi</p>
                         </div>
                     )}
                 </div>
 
-                {/* Кнопка скачивания */}
-                <button
-                    onClick={downloadFile}
-                    className="mt-6 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
-                >
-                    Faylni yuklab olish
-                </button>
+
+                {data && (
+                    <a
+                        className="mt-2 w-full py-2 bg-blue-600 text-white font-semibold rounded-md text-center block hover:bg-blue-700 transition duration-300"
+                        href={`https://j-sert.uz/sdg/uz/down/one/photo?id=${data.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Faylni yuklab olish
+                    </a>
+                )}
             </div>
         </NormalModal>
     );
