@@ -23,7 +23,7 @@ const cardsData = [
     id: 3,
     title: 'Namangan',
     image: img3,
-    link: 'https://www.google.com/maps/place/IS%60HOQXON+IBRAT+NOMIDAGI+NAMANGAN+DAVLAT+CHET+TILLARI+INSTITUTI/@41.0067253,71.5092686,668m/data=!3m2!1e3!4b1!4m6!3m5!1s0x38bb352f0bf9c835:0x15fb92619a203113!8m2!3d41.0067253!4d71.5092686!16s%2Fg%2F11t6vmz5fv?entry=ttu&g_ep=EgoyMDI1MDMzMC4wIKXMDSoASAFQAw%3D%3D', // Ссылка для третьей карточки
+    link: 'https://www.google.com/maps/place/Xan/@41.0061821,71.5087388,208m/data=!3m1!1e3!4m14!1m7!3m6!1s0x38bb352f0bf9c835:0x15fb92619a203113!2sNamangan+State+Institute+of+Foreign+Languages!8m2!3d41.0026184!4d71.6688341!16s%2Fg%2F11t6vmz5fv!3m5!1s0x38bb35492e42b7ff:0x6f2b42d89d9b5c98!8m2!3d41.0067766!4d71.5093!16s%2Fg%2F11sdkdkdwk?entry=ttu&g_ep=EgoyMDI1MDUwNy4wIKXMDSoASAFQAw%3D%3D', // Ссылка для третьей карточки
   },
   {
     id: 4,
