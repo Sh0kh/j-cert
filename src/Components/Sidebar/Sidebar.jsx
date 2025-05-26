@@ -3,7 +3,7 @@ import React from "react";
 import { FaHome, FaUser, FaFileAlt } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from '../../img/big-logo.jpg'
-import { IoTime  } from "react-icons/io5";
+import { IoTime } from "react-icons/io5";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -58,8 +58,18 @@ export default function Sidebar() {
             }`
           }
         >
-          <IoTime  className="text-xl mr-3" />
+          <IoTime className="text-xl mr-3" />
           <span className="text-sm">Test vaqti</span>
+        </NavLink>
+        <NavLink
+          to="/admin/qrfile"
+          className={({ isActive }) =>
+            `flex items-center p-3 rounded-md cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-100 text-blue-600" : "text-gray-700"
+            }`
+          }
+        >
+          <FaFileAlt className="text-xl mr-3" />
+          <span className="text-sm">Qr file</span>
         </NavLink>
       </ul>
     </div>

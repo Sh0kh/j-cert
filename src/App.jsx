@@ -18,6 +18,8 @@ import Register from "./Pages/Register";
 import CheckPage from "./Pages/CheckPage";
 import AdminTime from "./Pages/AdminPages/AdminTime";
 import UserInfo from "./Pages/UserInfo";
+import QRFile from "./Components/AdminComponents/AdminQRFile/QRFile";
+import QrFileCreate from "./Components/AdminComponents/AdminQRFile/QrFileCreate";
 
 
 
@@ -39,6 +41,8 @@ function App() {
             }
           >
             <Route path="/admin/home" element={<AdminHome />} />
+            <Route path="/admin/qrfile" element={<QRFile />} />
+            <Route path="/admin/qrfile/create" element={<QrFileCreate />} />
             <Route path="/admin/user" element={<AdminUser />} />
             <Route path="/admin/file" element={<AdminFile />} />
             <Route path='/admin/time' element={<AdminTime />} />

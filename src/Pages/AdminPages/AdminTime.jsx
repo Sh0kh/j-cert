@@ -64,7 +64,6 @@ export default function AdminTime() {
                     Edit Time
                 </button>
             </div>
-
             {data && (
                 <div className="bg-white shadow-md rounded-lg p-6">
                     <div className="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
