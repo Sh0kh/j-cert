@@ -88,12 +88,12 @@ export default function QRFile() {
                                 <td className="py-3 px-4 text-sm text-gray-700">{file.extension}</td>
                                 <td className="py-3 px-4 text-sm text-gray-700">{file.size}</td>
                                 <td className="py-3 px-4 text-sm text-gray-700 space-x-2">
-                                    <button
+                                    {/* <button
                                         className="bg-gray-300 text-white px-3 py-1 rounded hover:bg-gray-400"
                                         onClick={() => { setViewData(file); setViewModal(true) }}
                                     >
                                         <IoEyeSharp className="text-[20px]" />
-                                    </button>
+                                    </button> */}
                                     <button
                                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                                         onClick={() => {
