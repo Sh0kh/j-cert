@@ -20,6 +20,10 @@ import AdminTime from "./Pages/AdminPages/AdminTime";
 import UserInfo from "./Pages/UserInfo";
 import QRFile from "./Components/AdminComponents/AdminQRFile/QRFile";
 import QrFileCreate from "./Components/AdminComponents/AdminQRFile/QrFileCreate";
+import Maps from "./Pages/AdminPages/Maps";
+import Client from "./Pages/AdminPages/Client";
+import Post from "./Pages/AdminPages/Post";
+import AdminRegister from "./Pages/AdminPages/AdminRegister";
 
 
 
@@ -46,6 +50,10 @@ function App() {
             <Route path="/admin/user" element={<AdminUser />} />
             <Route path="/admin/file" element={<AdminFile />} />
             <Route path='/admin/time' element={<AdminTime />} />
+            <Route path='/admin/maps' element={<Maps />} />
+            <Route path='/admin/client' element={<Client />} />
+            <Route path='/admin/post' element={<Post />} />
+            <Route path='/admin/register' element={<AdminRegister />} />
           </Route>
           <Route element={<MainLayout />}>
             <Route index element={<Home />} />

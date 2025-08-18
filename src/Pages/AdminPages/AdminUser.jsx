@@ -173,15 +173,26 @@ export default function AdminUser() {
                             name="testLocation"
                             value={filters.testLocation}
                             onChange={handleFilterChange}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            required
                         >
                             <option value="">Tanlang</option>
                             <option value="Toshkent">Toshkent</option>
-                            <option value="Sirdaryo">Sirdaryo</option>
+                            <option value="Toshkent sh.">Toshkent sh.</option>
                             <option value="Samarqand">Samarqand</option>
                             <option value="Andijon">Andijon</option>
                             <option value="Namangan">Namangan</option>
+                            <option value="Farg‘ona">Farg‘ona</option>
+                            <option value="Sirdaryo">Sirdaryo</option>
+                            <option value="Jizzax">Jizzax</option>
+                            <option value="Qashqadaryo">Qashqadaryo</option>
+                            <option value="Surxondaryo">Surxondaryo</option>
+                            <option value="Buxoro">Buxoro</option>
+                            <option value="Navoiy">Navoiy</option>
+                            <option value="Xorazm">Xorazm</option>
+                            <option value="Qoraqalpog‘iston">Qoraqalpog‘iston</option>
                         </select>
+
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Status</label>

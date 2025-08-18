@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import img1 from "../../img/photo (4).jpg";
-import img2 from "../../img/photo (6).jpg";
-import img3 from "../../img/photo (8).jpg";
 import axios from "axios";
+import CONFIG from "../../utils/Config";
 
 export default function Clients({ data }) {
   const [time, setTime] = useState({
@@ -11,17 +9,15 @@ export default function Clients({ data }) {
     minutes: 0,
     seconds: 0,
   });
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [img1, img2, img3];
+  const [images, setImages] = useState([]);
 
-
+  // Таймер
   useEffect(() => {
-    // Only start the countdown if data is available
     if (!data) return;
 
     const countdownDate = new Date(data).getTime();
-
-    // Check if the date is valid
     if (isNaN(countdownDate)) {
       console.error("Invalid date format:", data);
       return;
@@ -45,52 +41,90 @@ export default function Clients({ data }) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [data]); // Only run when data changes
+  }, [data]);
 
-  // Auto-rotate slider
+  // Автопереключение
   useEffect(() => {
+    if (images.length === 0) return;
     const sliderInterval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000); // Changes every 5 seconds
-
+    }, 5000);
     return () => clearInterval(sliderInterval);
-  }, [images.length]);
+  }, [images]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    if (images.length > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    if (images.length > 0) {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    }
   };
+
+  // Получение картинок из backend
+  const getPost = async () => {
+    try {
+      const response = await axios.get(`/sdg/uz/branch/get?postType=POST`);
+      const arr = response.data?.object || [];
+
+      // формируем массив ссылок с photoId
+      const imgs = arr.map((item) =>
+        item.photoId
+          ? `${CONFIG?.API_URL}/sdg/uz/view/one/photo?id=${item.photoId}`
+          : "https://source.unsplash.com/random/400x300/?city"
+      );
+
+      setImages(imgs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPost();
+  }, []);
 
   return (
     <section id="clients" className="clients section light-background">
       <div className="section-two">
         <h2 className="head-two">Keyingi TEST sanasi</h2>
-        <div className="countdown">
-          <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="hours">
+        <div className="countdown  mb-[20px]">
+          <div style={{ width: "100px", height: "70px", fontSize: "20px" }}>
             <h2>{time.days}</h2>
             <p>DAYS</p>
           </div>
-          <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="hours">
+          <div style={{ width: "100px", height: "70px", fontSize: "20px" }}>
             <h2>{time.hours}</h2>
             <p>HOURS</p>
           </div>
-          <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="minutes">
+          <div style={{ width: "100px", height: "70px", fontSize: "20px" }}>
             <h2>{time.minutes}</h2>
             <p>MINUTES</p>
           </div>
-          <div style={{ width: "100px", height: "70px", fontSize: "20px" }} className="seconds">
+          <div style={{ width: "100px", height: "70px", fontSize: "20px" }}>
             <h2>{time.seconds}</h2>
             <p>SECONDS</p>
           </div>
         </div>
-        <p className="mt-[25px]" id="until">Vaqt qoldi</p>
+        <div className="h-[30px]">
+
+        </div>
+
         {/* Slider */}
         <div className="slider-container">
           <div className="slider">
-            <img src={images[currentIndex]} alt={`Image ${currentIndex + 1}`} className="slide-image" />
+            {images.length > 0 ? (
+              <img
+                src={images[currentIndex]}
+                alt={`Image ${currentIndex + 1}`}
+                className="slide-image"
+              />
+            ) : (
+              <p>Loading images...</p>
+            )}
           </div>
           <div className="buttons">
             <button onClick={prevSlide}>&#10094;</button>

@@ -4,6 +4,8 @@ import { FaHome, FaUser, FaFileAlt } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import logo from '../../img/big-logo.jpg'
 import { IoTime } from "react-icons/io5";
+import { ChartArea, MapIcon, User2Icon } from "lucide-react";
+import { MdPostAdd } from "react-icons/md";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -70,6 +72,46 @@ export default function Sidebar() {
         >
           <FaFileAlt className="text-xl mr-3" />
           <span className="text-sm">Qr file</span>
+        </NavLink>
+        <NavLink
+          to="/admin/maps"
+          className={({ isActive }) =>
+            `flex items-center p-3 rounded-md cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-100 text-blue-600" : "text-gray-700"
+            }`
+          }
+        >
+          <MapIcon className="text-xl mr-3" />
+          <span className="text-sm">Joylashuv</span>
+        </NavLink>
+        <NavLink
+          to="/admin/client"
+          className={({ isActive }) =>
+            `flex items-center p-3 rounded-md cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-100 text-blue-600" : "text-gray-700"
+            }`
+          }
+        >
+          <ChartArea className="text-xl mr-3" />
+          <span className="text-sm">Statistika</span>
+        </NavLink>
+        <NavLink
+          to="/admin/post"
+          className={({ isActive }) =>
+            `flex items-center p-3 rounded-md cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-100 text-blue-600" : "text-gray-700"
+            }`
+          }
+        >
+          <MdPostAdd className="text-xl mr-3" />
+          <span className="text-sm">Postlar</span>
+        </NavLink>
+        <NavLink
+          to="/admin/register"
+          className={({ isActive }) =>
+            `flex items-center p-3 rounded-md cursor-pointer hover:bg-gray-100 ${isActive ? "bg-gray-100 text-blue-600" : "text-gray-700"
+            }`
+          }
+        >
+          <User2Icon className="text-xl mr-3" />
+          <span className="text-sm">Register qoidasi</span>
         </NavLink>
       </ul>
     </div>
