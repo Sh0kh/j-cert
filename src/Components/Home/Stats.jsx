@@ -14,9 +14,7 @@ export default function Stats() {
   const getStat = async () => {
     try {
       const response = await axios.get(`/sdg/uz/info/get`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+
       });
 
       // если API возвращает массив, например [{ clientCount, projectCount, ... }]

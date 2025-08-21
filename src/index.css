@@ -24,26 +24,30 @@
   border-radius: 5px;
 }
 
+.why-us p {
+  margin-bottom: 0px !important;
+}
 
 
 
-.top_qwe{
+
+.top_qwe {
   position: fixed;
-    opacity: 0;
-    right: 15px;
-    bottom: 15px;
-    z-index: 99999;
-    background-color: var(--accent-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    transition: all 0.4s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-color: var(--surface-color);
-  }
- 
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 99999;
+  background-color: var(--accent-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  transition: all 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--surface-color);
+}
+
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -100,33 +104,45 @@ input[type="number"]::-webkit-inner-spin-button {
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #36343a; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #009970; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+:root {
+  --background-color: #ffffff;
+  /* Background color for the entire website, including individual sections */
+  --default-color: #444444;
+  /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #36343a;
+  /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #009970;
+  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff;
+  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff;
+  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
-:root{
+:root {
   --width: calc(1vh + 1vw)
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #444444;  /* The default color of the main navmenu links */
-  --nav-hover-color: #009970; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #444444; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #009970; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #444444;
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #009970;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #444444;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #009970;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -171,10 +187,12 @@ a {
   text-decoration: none;
   transition: 0.3s;
 }
+
 li {
   text-decoration: none;
-list-style: none;
+  list-style: none;
 }
+
 a:hover {
   color: color-mix(in srgb, var(--accent-color), transparent 25%);
   text-decoration: none;
@@ -1098,21 +1116,21 @@ section .section-two .head-two {
 }
 
 @media (hover: hover) {
-.card-three button:hover {
-      background-color: #00cc969c;
+  .card-three button:hover {
+    background-color: #00cc969c;
   }
 }
 
 @media (hover: none) {
-.card-three button:active {
-  background-color: #00cc969c;
+  .card-three button:active {
+    background-color: #00cc969c;
   }
 }
 
 @media screen and (max-width:800px) {
 
   .card-three {
-      padding: 30px 20px;
+    padding: 30px 20px;
   }
 }
 
@@ -1175,20 +1193,20 @@ button {
   background-color: #009970;
   margin-top: 20px;
   border-radius: 30px;
-  transition:  all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 @media (hover: hover) {
   button:hover {
-        background-color: #00cc969c;
-    }
-  }
-  
-  @media (hover: none) {
-   button:active {
     background-color: #00cc969c;
-    }
   }
+}
+
+@media (hover: none) {
+  button:active {
+    background-color: #00cc969c;
+  }
+}
 
 .why-us .why-box .more-btn i {
   font-size: 14px;
@@ -1338,7 +1356,7 @@ button {
 .section-five .card-top .card-five img {
   width: 100%;
   display: flex;
-   
+
 }
 
 .section-five .card-top .card-five h6 {
@@ -1359,21 +1377,22 @@ button {
 
 @media (hover: hover) {
   .section-five .card-top .card-five button:hover {
-        background-color: #00cc969c;
-    }
-  }
-  
-  @media (hover: none) {
-    .section-five .card-top .card-five button:active {
     background-color: #00cc969c;
-    }
   }
+}
+
+@media (hover: none) {
+  .section-five .card-top .card-five button:active {
+    background-color: #00cc969c;
+  }
+}
 
 @media screen and (max-width:1200px) {
 
   .section-five .card-top .card-five {
-      width: 100vw;
+    width: 100vw;
   }
+
   .section-five .card-top .card-five .one {
     margin-left: 0px;
   }
@@ -1485,9 +1504,10 @@ button {
 
 
 
-a{
+a {
   text-decoration: none !important;
 }
+
 .card-three a {
   margin-top: 20px;
   padding: 10px 20px;
@@ -1498,17 +1518,23 @@ a{
   color: #fff;
   margin-top: 30px;
 }
+
 .a_btn {
-border: none;
-padding: 10px 20px;
-background-color: #009970;
-margin-top: 50px;
-border-radius: 30px;
-transition: all 0.3s ease;
-color: #fff;
+
+  border: none;
+  padding: 10px 20px;
+  background-color: #009970;
+  margin-top: 20px !important;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.li_4{
-list-style:circle;
+
+.li_4 {
+  list-style: circle;
 }
 
 .header.scrolled {

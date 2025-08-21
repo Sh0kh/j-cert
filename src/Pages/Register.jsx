@@ -152,7 +152,7 @@ export default function Register() {
                 genderType: formData?.gender,
                 dateBirth: formData?.birthDate,
                 status: 'REGISTERED',
-                testLocation:formData?.testLocation,
+                testLocation: formData?.testLocation,
                 // registrationNumber: formData?.deliveryPlace,
                 phoneNumber: `+998${formData?.phoneNumber}`,
                 passportSerialNumber: formData?.passportSeries,
@@ -325,11 +325,20 @@ export default function Register() {
                         required
                     >
                         <option value="">Tanlang</option>
-                        <option value="Toshkent">Toshkent</option>
-                        <option value="Sirdaryo">Sirdaryo</option>
+                        <option value="Toshkent">Toshkent v.</option>
+                        <option value="Toshkent sh.">Toshkent sh.</option>
                         <option value="Samarqand">Samarqand</option>
                         <option value="Andijon">Andijon</option>
                         <option value="Namangan">Namangan</option>
+                        <option value="Farg‘ona">Farg‘ona</option>
+                        <option value="Sirdaryo">Sirdaryo</option>
+                        <option value="Jizzax">Jizzax</option>
+                        <option value="Qashqadaryo">Qashqadaryo</option>
+                        <option value="Surxondaryo">Surxondaryo</option>
+                        <option value="Buxoro">Buxoro</option>
+                        <option value="Navoiy">Navoiy</option>
+                        <option value="Xorazm">Xorazm</option>
+                        <option value="Qoraqalpog‘iston">Qoraqalpog‘iston</option>
                     </select>
                 </div>
 

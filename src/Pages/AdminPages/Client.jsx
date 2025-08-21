@@ -57,10 +57,8 @@ export default function Client() {
                 <Typography variant="h3" color="blue-gray" className=" font-bold">
                     Statistika
                 </Typography>
-                {data?.length ==! 0 ? <ClientEdit data={data[0]} refresh={getClients} /> : <ClientCreate refresh={getClients} />}
-
+                {data?.length == !0 ? <ClientEdit data={data[0]} refresh={getClients} /> : <ClientCreate refresh={getClients} />}
             </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
                 {stats.map((item, index) => (
                     <Card key={index} className="shadow-lg hover:shadow-2xl transition-shadow duration-300">

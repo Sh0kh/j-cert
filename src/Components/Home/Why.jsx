@@ -11,9 +11,9 @@ export default function Why({ data }) {
   const getLocation = async () => {
     try {
       const response = await axios.get(`/sdg/uz/branch/get?postType=REGISTER`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // },
       });
       // API возвращает { object: [ { id, title, content, imageUrl, mapLink } ] }
       setLocations(response?.data?.object || []);
@@ -57,7 +57,7 @@ export default function Why({ data }) {
                       </p>
                     </>
                   )}
-                  <NavLink className="a_btn" to={"/register"}>
+                  <NavLink className="a_btn " to={"/register"}>
                     Hujjatlarni jo'natish
                   </NavLink>
                 </div>

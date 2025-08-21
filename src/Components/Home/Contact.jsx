@@ -12,9 +12,9 @@ export default function Contact() {
     try {
       const response = await axios.get(`/sdg/uz/branch/get?postType=MAP
 `, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // },
       });
 
       // допустим, API возвращает { object: [ { id, name, imageUrl, mapLink } ] }
